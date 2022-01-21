@@ -17,8 +17,6 @@ const ViewProduct = () => {
           document.title = 'View Product';
         async function fetchMyAPI() {
            const response = await axios.get(`/api/view-product`);
-
-           console.log(response)
            if(response.status === 200){
             setProductList(response.data.products)
            }
@@ -50,20 +48,28 @@ const ViewProduct = () => {
 
     var td = '';
     if(loading){
-        return <h3>Loading Category...</h3>
+        return <h3>Loading Product...</h3>
     }else{
         var no = 0;
+        var productStatus = '';
         td = 
         productList.map((item) => {
+            console.log(item);
+            if(item.status === 0){
+                productStatus = 'Shown';
+            }else{
+                productStatus = 'Hidden';
+            }   
             return (
                 <tr key={item.id}>
                     <td>{++no}</td>
-                    <td>{item.category.name}</td>
+                    <td>{item.name}</td>
                     <td>{item.name}</td>
                     <td>{item.selling_price}</td>
                     <td> <img src={`http://localhost:8000/${item.image}`} alt={item.name} width='50' /> </td>
+                    <td> {productStatus}  </td>
                     <td><Link to={`edit-product/${item.id}`} className="btn btn-primary btn-sm" >Edit</Link></td>
-                    <td><button type="button" className="btn btn-danger btn-sm" onClick={ (e) => deleteCategory(e,item.id)} >Delete</button></td>
+                   
                 </tr>
             )   
         });
@@ -88,8 +94,8 @@ const ViewProduct = () => {
                             <th>Product Name</th>
                             <th>Selling Price</th>
                             <th>Image</th>
+                            <th>Status</th>
                             <th>Edit</th>
-                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>

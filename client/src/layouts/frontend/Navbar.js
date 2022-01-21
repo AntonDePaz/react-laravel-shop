@@ -52,6 +52,10 @@ const Navbar = () => {
         <div className="collapse  navbar-collapse" id="navbarNavAltMarkup">
           <div className="navbar-nav ms-auto">
             <Link className="nav-item nav-link active" to="/">Home <span className="sr-only">(current)</span></Link>
+            <Link className="nav-item nav-link active" to="/about">About <span className="sr-only"></span></Link>
+            <Link className="nav-item nav-link active" to="/contact">Contact <span className="sr-only"></span></Link>
+            <Link className="nav-item nav-link active" to="/collections">Collections <span className="sr-only"></span></Link>
+            <Link className="nav-item nav-link active" to="/cart">Cart <span className="sr-only"></span></Link>
             {authButtons}
           </div>
         </div>

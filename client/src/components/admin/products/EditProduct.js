@@ -13,6 +13,8 @@ export const EditProduct = (props) => {
 
     const [error, setError] = useState();
 
+    const [checkBoxes, setCheckBox] = useState([]);
+
     const [product, setProduct] = useState({
         category_id : '',
         slug: "",
@@ -49,6 +51,7 @@ export const EditProduct = (props) => {
         axios.get(`/api/edit-product/${product_id}`).then(res => {
             if(res.data.status === 200){
                setProduct(res.data.product);
+               setCheckBox(res.data.product);
             }else{
                 swal('Error',res.data.message,'error')
                 history.push('/admin/view-product')
@@ -59,7 +62,11 @@ export const EditProduct = (props) => {
     }, []);
    
 
-    console.log('category:',category);
+    console.log('checkBoxes:',checkBoxes);
+
+    const handleCheckbox = (e) => {
+        setCheckBox({...checkBoxes , [e.target.name] : e.target.checked})
+    }
 
     const handleInput = (e) => {
             setProduct({...product , [e.target.name] : e.target.value})
@@ -88,9 +95,9 @@ export const EditProduct = (props) => {
        formData.append('original_price', product.original_price);
        formData.append('quantity', product.quantity);
        formData.append('brand', product.brand);
-       formData.append('featured', product.featured);
-       formData.append('popular', product.popular);
-       formData.append('status', product.status);
+       formData.append('featured', checkBoxes.featured ? '1': '0');
+       formData.append('popular', checkBoxes.popular ? '1': '0');
+       formData.append('status', checkBoxes.status ? '1': '0');
 
        
        axios.post(`/api/update-product/${product_id}`, formData).then((response)=>{
@@ -110,10 +117,8 @@ export const EditProduct = (props) => {
             original_price: "",
             brand: "",
             quantity: "",
-            selling_price: "",
-            status: "",
-            featured: "",
-            popular: "",})
+            selling_price: ""
+           })
             history.push('/admin/view-product')
          }else if(response.data.status === 422){
             swal('Product Not Found',response.data.message,'error')
@@ -254,21 +259,21 @@ export const EditProduct = (props) => {
                                         </div> 
                                 </div>
                                 <div className='col-md-4'>
-                                <img src={`http://localhost:8000/${product.image}`} alt={product.name}  />
+                                <img src={`http://localhost:8000/${product.image}`} alt={product.name} width='250'  />
                                 </div>
                                     
                                 <div className='row'>
                                   
-                                            <label>FEATURED (checked-shown)</label>
-                                            <input type='checkbox' name="featured" onChange={handleInput} value={product.featured}  />
+                                            <label>FEATURED (checked=hidden)</label>
+                                            <input type='checkbox' name="featured"  defaultChecked={checkBoxes.featured === 1 ? true : false} onChange={handleCheckbox}   />
                                             <span className="text-danger" >  </span>
                                        
-                                            <label>POPULAR (checked-shown)</label>
-                                            <input type='checkbox' name="popular" onChange={handleInput} value={product.popular} />
+                                            <label>POPULAR (checked=hidden)</label>
+                                            <input type='checkbox' name="popular"  defaultChecked={checkBoxes.popular === 1 ? true : false}  onChange={handleCheckbox} />
                                             <span className="text-danger" >  </span>
                                       
-                                            <label>STATUS (checked-shown)</label>
-                                            <input type='checkbox' name="status"  onChange={handleInput} value={product.status} />
+                                            <label>STATUS (checked=hidden)</label>
+                                            <input type='checkbox' name="status"   defaultChecked={checkBoxes.status === 1 ? true : false} onChange={handleCheckbox}  />
                                             <span className="text-danger" >  </span>
                                       
                                 </div>

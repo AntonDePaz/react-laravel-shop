@@ -6,6 +6,7 @@ import EditCategory from "../components/admin/category/EditCategory";
 import { AddProduct } from "../components/admin/products/AddProduct";
 import ViewProduct from "../components/admin/products/ViewProduct";
 import { EditProduct } from "../components/admin/products/EditProduct";
+import Orders from "../components/admin/Orders";
 
 const routes = [
      { path : '/admin' , exact : true , name : 'Admin'},
@@ -21,6 +22,9 @@ const routes = [
      { path : '/admin/add-product' , exact : true , name : 'AddProduct', component: AddProduct},
      { path : '/admin/view-product' , exact : true , name : 'ViewProduct', component: ViewProduct},
      { path : '/admin/edit-product/:id' , exact : true , name : 'EditProduct', component: EditProduct},
+
+     //orders
+     { path : '/admin/orders' , exact : true , name : 'Orders', component: Orders},
 
      
 ];

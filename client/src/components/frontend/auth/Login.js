@@ -50,7 +50,7 @@ const Login = () => {
 
     return (
         <div>
-            <Navbar/>
+            {/* <Navbar/> */}
         <div id="layoutAuthentication">
         <div id="layoutAuthentication_content">
             <main>

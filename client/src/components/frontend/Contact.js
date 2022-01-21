@@ -7,17 +7,17 @@ import Navbar from '../../layouts/frontend/Navbar'
 
 
 
-const Home = () => {
+const Contact = () => {
     return (
         <div>
-       
+            
              <main>
                     <div className="container">
-                        <h1 className='text-center' >This is Users Home</h1>
+                        <h1 className='text-center' >This is Contact Page</h1>
                     </div>
             </main>
         </div>
     )
 }
 
-export default Home
+export default Contact

@@ -58,7 +58,7 @@ const ViewCategory = () => {
                     <td>{++no}</td>
                     <td>{item.name}</td>
                     <td>{item.slug}</td>
-                    <td>{item.status}</td>
+                    <td>{item.status === 0 ? 'Shown' : 'Hide'}</td>
                     <td><Link to={`edit-category/${item.id}`} className="btn btn-primary btn-sm" >Edit</Link></td>
                     <td><button type="button" className="btn btn-danger btn-sm" onClick={ (e) => deleteCategory(e,item.id)} >Delete</button></td>
                 </tr>
